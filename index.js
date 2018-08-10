@@ -1,4 +1,5 @@
 const bodyParser = require('body-parser')
+const cool = require('cool-ascii-faces')
 const express = require('express')
 const path = require('path')
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
@@ -16,6 +17,7 @@ express()
   .set('view engine', 'ejs')
 
   .get('/', (req, res) => res.render('pages/index'))
+  .get('/cool', (req, res) => res.send(cool()))
   .get('/db', async (req, res) => {
     try {
       const client = await pool.connect()
