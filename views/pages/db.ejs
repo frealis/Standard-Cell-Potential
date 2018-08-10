@@ -1,23 +1,30 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <% include ../partials/header.ejs %>
-</head>
+  <head>
+    <% include ../partials/header.ejs %>
+  </head>
 
-<body>
+  <body>
+  <% include ../partials/nav.ejs %>
+    <div class="container">
+      <h3>Input Form</h3>
+      <form id="index-form" method="POST" action="/db">
 
-<% include ../partials/nav.ejs %>
+        <label for="input_a">input A: </label>
+        <input type="text" name="input_a" /><br>
 
-<div class="container">
-<h2>Database Results</h2>
+        <label for="input_b">input B: </label>
+        <input type="text" name="input_b" /><br>
 
-<ul>
-    <% results.forEach(function(r) { %>
-        <li><%= r.id %> - <%= r.name %></li>
-    <% }); %>
-</ul>
+        <input type="submit" value="submit" />
 
-</div>
+      </form>
 
-</body>
+      <h3>Results</h3>
+      <ul>
+        <li><%= a %></li>
+        <li><%= b %></li>
+      </ul>
+    </div>
+  </body>
 </html>
