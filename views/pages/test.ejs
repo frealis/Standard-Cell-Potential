@@ -9,22 +9,54 @@
 
   <h2>Input</h2>
   <form id="index-form" method="POST" action="/test">
-    <label for="input_a">A: </label>
-    <input type="text" name="input_a" /><br>
+    X:
+    <select name="input_x" class="input"> 
+      <% for(var i = 0; i < element.length; i++) { %>
+        <option><%= element[i].elementname %></option>
+      <% }; %>
+    </select><br>
 
-    <label for="input_b">B: </label>
-    <input type="text" name="input_b" /><br>
+    Y:
+    <select name="input_y" class="input"> 
+      <% for(var i = 0; i < element.length; i++) { %>
+        <option><%= element[i].elementname %></option>
+      <% }; %>
+    </select><br>
 
     <input type="submit" value="submit" />
   </form>
 
   <h3>Result:</h3>
   <div>
-    <h4>A</h4>
-    
-    <%= result %>
+    <h4>Cell X</h4>
+    <ul>
+      <li>element: <%= result_en_x %></li>
+      <li>atomic number: <%= result_an_x %></li>
+      <li>standard electrode potential: <%= result_sep_x %></li>
+    </ul>
 
+    <h4>Cell Y</h4>
+    <ul>
+      <li>element: <%= result_en_y %></li>
+      <li>atomic number: <%= result_an_y %></li>
+      <li>standard electrode potential: <%= result_sep_y %></li>
+    </ul>
+
+    <h4>Results</h4>
+    <ul>
+      <li>Cell potential (Ecell, V): </li>
+      <li>Anode: </li>
+      <li>Cathode: </li>
+    </ul>
   </div>
 
 </body>
 </html>
+
+<!-- <select id="dd1" class="element-input"> 
+    <option value="copper">Copper</option>
+    <option value="zinc">Zinc</option>
+</select> -->
+
+<!-- <label for="input_y">Y: </label>
+<input type="text" name="input_y" /><br> -->
