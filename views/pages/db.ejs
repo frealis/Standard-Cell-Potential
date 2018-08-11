@@ -1,30 +1,26 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <% include ../partials/header.ejs %>
-  </head>
+<head>
+  <% include ../partials/header.ejs %>
+</head>
 
-  <body>
-  <% include ../partials/nav.ejs %>
-    <div class="container">
-      <h3>Input Form</h3>
-      <form id="index-form" method="POST" action="/db">
+<body>
 
-        <label for="input_a">input A: </label>
-        <input type="text" name="input_a" /><br>
+<% include ../partials/nav.ejs %>
 
-        <label for="input_b">input B: </label>
-        <input type="text" name="input_b" /><br>
+<div class="container">
+<h2>Database Results</h2>
 
-        <input type="submit" value="submit" />
+<ul>
+    <% result.rows.forEach(function(r) { %>
+        <li>Atomic Number: <%= r.atomicnumber %><br>
+            Element Name: <%= r.elementname %><br>
+            Standard Electrode Potential: <%= r.sep %><br><br>
+        </li>
+    <% }); %>
+</ul>
 
-      </form>
+</div>
 
-      <h3>Results</h3>
-      <ul>
-        <li><%= a %></li>
-        <li><%= b %></li>
-      </ul>
-    </div>
-  </body>
+</body>
 </html>
