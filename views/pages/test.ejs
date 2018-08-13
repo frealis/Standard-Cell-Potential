@@ -11,15 +11,15 @@
   <form id="index-form" method="POST" action="/test">
     X:
     <select name="input_x" class="input"> 
-      <% for(var i = 0; i < element.length; i++) { %>
-        <option><%= element[i].elementname %></option>
+      <% for(var i = 0; i < elemOptions.length; i++) { %>
+        <option><%= elemOptions[i].elementname %></option>
       <% }; %>
     </select><br>
 
     Y:
     <select name="input_y" class="input"> 
-      <% for(var i = 0; i < element.length; i++) { %>
-        <option><%= element[i].elementname %></option>
+      <% for(var i = 0; i < elemOptions.length; i++) { %>
+        <option><%= elemOptions[i].elementname %></option>
       <% }; %>
     </select><br>
 
@@ -30,16 +30,16 @@
   <div>
     <h4>Cell X</h4>
     <ul>
-      <li>element: <%= result_en_x %></li>
-      <li>atomic number: <%= result_an_x %></li>
-      <li>standard electrode potential: <%= result_sep_x %></li>
+      <li>element: <%= elemName_X %></li>
+      <li>atomic number: <%= atomNum_X %></li>
+      <li>standard electrode potential: <%= stndElecPot_X %></li>
     </ul>
 
     <h4>Cell Y</h4>
     <ul>
-      <li>element: <%= result_en_y %></li>
-      <li>atomic number: <%= result_an_y %></li>
-      <li>standard electrode potential: <%= result_sep_y %></li>
+      <li>element: <%= elemName_Y %></li>
+      <li>atomic number: <%= atomNum_Y %></li>
+      <li>standard electrode potential: <%= stndElecPot_Y %></li>
     </ul>
 
     <h4>Results</h4>

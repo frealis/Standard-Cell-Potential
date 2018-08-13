@@ -10,13 +10,21 @@
     <div class="jumbotron text-center">
       <h2>Input</h2>
       <form id="index-form" method="POST" action="/">
-        <label for="input_a">A: </label>
-        <input type="text" name="input_a" /><br>
-
-        <label for="input_b">B: </label>
-        <input type="text" name="input_b" /><br>
-
-        <input type="submit" value="submit" class="input" />
+        A:
+        <select name="input_a" class="input"> 
+          <% for(var i = 0; i < elemOptions.length; i++) { %>
+            <option><%= elemOptions[i].elementname %></option>
+          <% }; %>
+        </select><br>
+    
+        B:
+        <select name="input_b" class="input"> 
+          <% for(var i = 0; i < elemOptions.length; i++) { %>
+            <option><%= elemOptions[i].elementname %></option>
+          <% }; %>
+        </select><br>
+    
+        <input type="submit" value="submit" />
       </form>
 
       <!-- <a type="button" class="btn btn-lg btn-default" href="asdf"><span class="glyphicon glyphicon-flash"></span> Cell A</a> -->
@@ -31,17 +39,17 @@
       <div class="col-md-6">
         <h3><span class="glyphicon glyphicon-info-sign"></span> Cell A</h3>
         <ul>
-          <li>element: <%= result_en_a %></li>
-          <li>atomic number: <%= result_an_a %></li>
-          <li>standard electrode potential: <%= result_sep_a %></li>
-        </ul> 
+          <li>element: <%= elemName_A %></li>
+          <li>atomic number: <%= atomNum_A %></li>
+          <li>standard electrode potential: <%= stndElecPot_A %></li>
+        </ul>
       </div>
       <div class="col-md-6">
         <h3><span class="glyphicon glyphicon-link"></span> Cell B</h3>
         <ul>
-          <li>element: <%= result_en_b %></li>
-          <li>atomic number: <%= result_an_b %></li>
-          <li>standard electrode potential: <%= result_sep_b %></li>
+          <li>element: <%= elemName_B %></li>
+          <li>atomic number: <%= atomNum_B %></li>
+          <li>standard electrode potential: <%= stndElecPot_B %></li>
         </ul>
         <h3><span class="glyphicon glyphicon-link"></span> Results</h3>
         <ul>
