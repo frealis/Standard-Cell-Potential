@@ -2,67 +2,69 @@
 <html>
   <head>
     <% include ../partials/header.ejs %>
+
+    <title>Battery Webpage - index.ejs</title>
   </head>
 
   <body>
     <% include ../partials/nav.ejs %>
 
     <div class="jumbotron text-center">
-      <h2>Input</h2>
-      <form id="index-form" method="POST" action="/">
-        A:
-        <select name="input_a" class="input"> 
-          <% for(var i = 0; i < elemOptions.length; i++) { %>
-            <option><%= elemOptions[i].elementname %></option>
-          <% }; %>
-        </select><br>
-    
-        B:
-        <select name="input_b" class="input"> 
-          <% for(var i = 0; i < elemOptions.length; i++) { %>
-            <option><%= elemOptions[i].elementname %></option>
-          <% }; %>
-        </select><br>
-    
-        <input type="submit" value="submit" />
+      <form method="POST" action="/">
+        <div class="row">
+          <div class="col-md-3 container">
+            Select an element for cell A:
+            <select name="input_a" class="input form-control"> 
+              <% for(var i = 0; i < elemOptions.length; i++) { %>
+                <option><%= elemOptions[i].elementname %></option>
+              <% }; %>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <!-- <img class="img-fluid" src="battery1.png"> -->
+          </div>
+          <div class="col-md-3 container">
+            Select an element for cell B:
+            <select name="input_b" class="input form-control"> 
+              <% for(var i = 0; i < elemOptions.length; i++) { %>
+                <option><%= elemOptions[i].elementname %></option>
+              <% }; %>
+            </select>
+          </div>
+        </div>
+        <br>
+        <button type="submit" class="btn btn-success">Submit</button>
       </form>
+    </div>
 
-      <!-- <a type="button" class="btn btn-lg btn-default" href="asdf"><span class="glyphicon glyphicon-flash"></span> Cell A</a> -->
-      <!-- <a type="button" class="btn btn-lg btn-primary" href="asdf"><span class="glyphicon glyphicon-download"></span> Cell B</a> -->
-    </div>
-  <div class="container">
-    <div class="alert alert-info text-center" role="alert">
-      Text
-    </div>
-    <hr>
-    <div class="row">
-      <div class="col-md-6">
-        <h3><span class="glyphicon glyphicon-info-sign"></span> Cell A</h3>
-        <ul>
-          <li>element: <%= elemName_A %></li>
-          <li>atomic number: <%= atomNum_A %></li>
-          <li>standard electrode potential: <%= stndElecPot_A %></li>
-        </ul>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h4>Cell A</h4>
+          <ul class="list-group text-left">
+            <li class="list-group-item">element: <%= elemName_A %></li>
+            <li class="list-group-item">atomic number: <%= atomNum_A %></li>
+            <li class="list-group-item">electrode potential: <%= stndElecPot_A %></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4>Cell B</h4>
+          <ul class="list-group text-left">
+            <li class="list-group-item">element: <%= elemName_B %></li>
+            <li class="list-group-item">atomic number: <%= atomNum_B %></li>
+            <li class="list-group-item">electrode potential: <%= stndElecPot_B %></li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <h4>Results</h4>
+          <ul>
+            <li>Cell potential (Ecell, V): </li>
+            <li>Anode: </li>
+            <li>Cathode: </li>
+          </ul>
+        </div>
       </div>
-      <div class="col-md-6">
-        <h3><span class="glyphicon glyphicon-link"></span> Cell B</h3>
-        <ul>
-          <li>element: <%= elemName_B %></li>
-          <li>atomic number: <%= atomNum_B %></li>
-          <li>standard electrode potential: <%= stndElecPot_B %></li>
-        </ul>
-        <h3><span class="glyphicon glyphicon-link"></span> Results</h3>
-        <ul>
-          <li>Cell potential (Ecell, V): </li>
-          <li>Anode: </li>
-          <li>Cathode: </li>
-        </ul>
-      </div>
-    </div> <!-- row -->
-    <div class="alert alert-info text-center" role="alert">
-      footer
-    </div>
-  </div>
 
+      <% include ../partials/footer.ejs %>
   </body>
 </html>
