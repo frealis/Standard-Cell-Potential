@@ -57,10 +57,11 @@
         </div>
         <div class="col-md-4">
           <h4>Results</h4>
-          <ul>
-            <li>Cell potential (Ecell, V): </li>
-            <li>Anode: </li>
-            <li>Cathode: </li>
+          <ul class="list-group text-left">
+            <!-- Use some technique called "scaling" to deal with rounding issues https://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-only-if-necessary -->
+            <li class="list-group-item">Cell potential (Ecell, V): <%= Math.round(ecell * 100) / 100 %> </li>
+            <li class="list-group-item">Positive (+) terminal: </li>
+            <li class="list-group-item">Negative (-) terminal: </li>
           </ul>
         </div>
       </div>

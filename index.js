@@ -26,8 +26,9 @@ express()
         stndElecPot_A:  '',
         elemName_B:     '',
         atomNum_B:      '',
-        stndElecPot_B: '',
-        elemOptions:    elemOptions.rows
+        stndElecPot_B:  '',
+        elemOptions:    elemOptions.rows,
+        ecell:          ''
       });
       client.release();
     } 
@@ -43,8 +44,9 @@ express()
         stndElecPot_X:  '',
         elemName_Y:     '',
         atomNum_Y:      '',
-        stndElecPot_Y: '',
-        elemOptions:    elemOptions.rows
+        stndElecPot_Y:  '',
+        elemOptions:    elemOptions.rows,
+        ecell:          ''
       });
       client.release();
     } 
@@ -57,6 +59,7 @@ express()
       const cell_A = await client.query(`SELECT * FROM periodic_table WHERE elementname='${req.body.input_a}'`);
       const cell_B = await client.query(`SELECT * FROM periodic_table WHERE elementname='${req.body.input_b}'`);
       const elemOptions = await client.query('SELECT * FROM periodic_table');
+      var ecell = Math.abs(parseFloat(cell_A.rows[0].sep) - parseFloat(cell_B.rows[0].sep))
       res.render('pages/', {
         elemName_A:     cell_A.rows[0].elementname,
         atomNum_A:      cell_A.rows[0].atomicnumber,
@@ -64,7 +67,8 @@ express()
         elemName_B:     cell_B.rows[0].elementname,
         atomNum_B:      cell_B.rows[0].atomicnumber,
         stndElecPot_B:  cell_B.rows[0].sep,
-        elemOptions:    elemOptions.rows
+        elemOptions:    elemOptions.rows,
+        ecell:          ecell
       });
       client.release();
     } 
@@ -76,6 +80,7 @@ express()
       const cell_X = await client.query(`SELECT * FROM periodic_table WHERE elementname='${req.body.input_x}'`);
       const cell_Y = await client.query(`SELECT * FROM periodic_table WHERE elementname='${req.body.input_y}'`);
       const elemOptions = await client.query('SELECT * FROM periodic_table');
+      var ecell = Math.abs(parseFloat(cell_X.rows[0].sep) - parseFloat(cell_Y.rows[0].sep))
       res.render('pages/test', {
         elemName_X:     cell_X.rows[0].elementname,
         atomNum_X:      cell_X.rows[0].atomicnumber,
@@ -83,7 +88,8 @@ express()
         elemName_Y:     cell_Y.rows[0].elementname,
         atomNum_Y:      cell_Y.rows[0].atomicnumber,
         stndElecPot_Y:  cell_Y.rows[0].sep,
-        elemOptions:    elemOptions.rows
+        elemOptions:    elemOptions.rows,
+        ecell:          ecell
       });
       client.release();
     } 
@@ -91,16 +97,3 @@ express()
   })
 
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
-
-
-
-
-  // .get('/db', async (req, res) => {
-  //   try {
-  //     const client = await pool.connect();
-  //     const result = await client.query('SELECT * FROM periodic_table');
-  //     res.render('pages/db', {result: result});
-  //     client.release();
-  //   } 
-  //   catch (err) {console.error(err); res.send("Error " + err);}
-  // })
