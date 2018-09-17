@@ -82,17 +82,13 @@ express()
       const elemOptions = await client.query('SELECT * FROM periodic_table');
       var ecell = Math.abs(parseFloat(cell_X.rows[0].sep) - parseFloat(cell_Y.rows[0].sep))
       res.render('pages/test', {
-        elemName_X:     cell_X.rows[0].elementname,
-        atomNum_X:      cell_X.rows[0].atomicnumber,
-        stndElecPot_X:  cell_X.rows[0].sep,
-        elemName_Y:     cell_Y.rows[0].elementname,
-        atomNum_Y:      cell_Y.rows[0].atomicnumber,
-        stndElecPot_Y:  cell_Y.rows[0].sep,
+        cell_X:         cell_X.rows,
+        cell_Y:         cell_Y.rows,
         elemOptions:    elemOptions.rows,
         ecell:          ecell
       });
       client.release();
-    } 
+    }
     catch (err) {console.error(err); res.send("Error " + err);}
   })
 

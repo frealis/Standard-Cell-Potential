@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <% include ../partials/header.ejs %>
@@ -15,7 +15,9 @@
           <div class="col-md-3 container">
             Select an element for cell X:
             <select name="input_x" class="input form-control"> 
-              <% include ../partials/elementOptions.ejs %>
+              <% for(var i = 0; i < elemOptions.length; i++) { %>
+                <option><%= elemOptions[i].elementname %></option>
+              <% }; %>
             </select>
           </div>
           <div class="col-md-6">
@@ -24,7 +26,9 @@
           <div class="col-md-3 container">
             Select an element for cell Y:
             <select name="input_y" class="input form-control"> 
-              <% include ../partials/elementOptions.ejs %>
+              <% for(var i = 0; i < elemOptions.length; i++) { %>
+                <option><%= elemOptions[i].elementname %></option>
+              <% }; %>
             </select>
           </div>
         </div>
@@ -63,9 +67,9 @@
         <div class="col-md-4">
           <h4>Test Output</h4>
           <ul class="list-group text-left">
-            <li class="list-group-item">1: <%= elemOptions %> </li>
-            <li class="list-group-item">2: <%= elemOptions[0] %> </li>
-            <li class="list-group-item">3: <%= cell_X %> </li>
+            <li class="list-group-item">1: <%= elemOptions[0] %> </li>
+            <li class="list-group-item">2: <%= cell_X[0].elementname %> </li>
+            <li class="list-group-item">3: <%=  %> </li>
           </ul>
         </div>
       </div>
