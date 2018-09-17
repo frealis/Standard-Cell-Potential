@@ -8,8 +8,8 @@ const pool = new Pool({
   ssl: true
 });
 
-var bodyParser = require('body-parser');
-var urlencodedParser = bodyParser.urlencoded({ extended: false })
+let bodyParser = require('body-parser');
+let urlencodedParser = bodyParser.urlencoded({ extended: false })
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
@@ -80,12 +80,16 @@ express()
       const cell_X = await client.query(`SELECT * FROM periodic_table WHERE elementname='${req.body.input_x}'`);
       const cell_Y = await client.query(`SELECT * FROM periodic_table WHERE elementname='${req.body.input_y}'`);
       const elemOptions = await client.query('SELECT * FROM periodic_table');
-      var ecell = Math.abs(parseFloat(cell_X.rows[0].sep) - parseFloat(cell_Y.rows[0].sep))
+      let ecell = Math.abs(parseFloat(cell_X.rows[0].sep) - parseFloat(cell_Y.rows[0].sep));
+      let posTerminal = parseFloat(cell_X.rows[0].sep) > parseFloat(cell_Y.rows[0].sep) ? cell_X.rows[0].elementname : cell_Y.rows[0].elementname;
+      let negTerminal = parseFloat(cell_X.rows[0].sep) < parseFloat(cell_Y.rows[0].sep) ? cell_X.rows[0].elementname : cell_Y.rows[0].elementname;
       res.render('pages/test', {
         cell_X:         cell_X.rows,
         cell_Y:         cell_Y.rows,
         elemOptions:    elemOptions.rows,
-        ecell:          ecell
+        ecell:          ecell,
+        posTerminal:    posTerminal,
+        negTerminal:    negTerminal
       });
       client.release();
     }
