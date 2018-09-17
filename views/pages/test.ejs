@@ -14,8 +14,10 @@
         <div class="row">
           <div class="col-md-3 container">
             Select an element for cell X:
-            <select name="input_x" class="input form-control"> 
+            <select id="selected_x" name="input_x" class="input form-control"> 
               <% include ../partials/elementOptions.ejs %>
+              <%= console.log(cell_Y.elementname) %>
+
             </select>
           </div>
           <div class="col-md-6">
@@ -23,7 +25,7 @@
           </div>
           <div class="col-md-3 container">
             Select an element for cell Y:
-            <select name="input_y" class="input form-control"> 
+            <select id="selected_y" name="input_y" class="input form-control"> 
               <% include ../partials/elementOptions.ejs %>
             </select>
           </div>

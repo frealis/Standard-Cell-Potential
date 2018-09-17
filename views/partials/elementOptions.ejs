@@ -1,3 +1,22 @@
+
+<!-- iterate through elemOptions to populate the drop-down menus with names -->
 <% for(var i = 0; i < elemOptions.length; i++) { %>
   <option><%= elemOptions[i].elementname %></option>
 <% }; %>
+
+<!-- save the previously selected element after a POST request -->
+<!-- https://www.daftlogic.com/information-programmatically-preselect-dropdown-using-javascript.htm -->
+
+<!-- <%= cell_Y.elementname %>
+<script>
+  function setSelectedIndex_y(s, v) {
+    for (var i = 0; i < s.options.length; i++) {
+      if (s.options[i].text === v) {
+        s.options[i].selected = true;
+        return;
+      };
+    };
+  };
+  let a = ?
+  setSelectedIndex_y(document.getElementById("selected_y"), a);
+</script> -->

@@ -79,9 +79,12 @@ express()
   .post('/test', urlencodedParser, async (req, res) => {
     try {
       const client = await pool.connect();
+
+      // this returns a bunch of arrays[], called rows[], that contain 
+      // objects{} with elementname, atomicnumber, and sep 
       const elemOptions = await client.query('SELECT * FROM periodic_table');
       
-      // creating cell_X using a self-invoking function
+      // create cell_X using a self-invoking function
       // https://www.w3schools.com/js/js_function_definition.asp
       let cell_X = (function () {
         for (let i = 0; i < elemOptions.rows.length; i++) {
@@ -92,7 +95,7 @@ express()
         };
       })();
 
-      // creating cell_Y using a self-invoking function
+      // create cell_Y using a self-invoking function
       let cell_Y = (function () {
         for (let i = 0; i < elemOptions.rows.length; i++) {
           if (elemOptions.rows[i].elementname === req.body.input_y) {
@@ -101,6 +104,8 @@ express()
           };
         };
       })();
+
+      
       
       // calculations
       let ecell = Math.abs(parseFloat(cell_X.sep) - parseFloat(cell_Y.sep));
