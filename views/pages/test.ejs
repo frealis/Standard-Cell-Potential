@@ -37,35 +37,20 @@
       <div class="row">
         <div class="col-md-4">
           <h4>Cell X</h4>
-          <ul class="list-group text-left">
-            <li class="list-group-item">element: <%= cell_X.elementname %></li>
-            <li class="list-group-item">atomic number: <%= cell_X.atomicnumber %></li>
-            <li class="list-group-item">electrode potential: <%= cell_X.sep %></li>
+          <ul id="ul_x" class="list-group text-left">
+           <% include ../partials/cellXData.ejs %>
           </ul>
         </div>
         <div class="col-md-4">
           <h4>Cell Y</h4>
           <ul class="list-group text-left">
-            <li class="list-group-item">element: <%= cell_Y.elementname %></li>
-            <li class="list-group-item">atomic number: <%= cell_Y.atomicnumber %></li>
-            <li class="list-group-item">electrode potential: <%= cell_Y.sep %></li>
+           <% include ../partials/cellYData.ejs %>
           </ul>
         </div>
         <div class="col-md-4">
           <h4>Results</h4>
           <ul class="list-group text-left">
-            <!-- Use some technique called "scaling" to deal with rounding issues https://stackoverflow.com/questions/11832914/round-to-at-most-2-decimal-places-only-if-necessary -->
-            <li class="list-group-item">Cell potential (Ecell, V): <%= Math.round(ecell * 100) / 100 %> </li>
-            <li class="list-group-item">Positive (+) terminal: <%= posTerminal %></li>
-            <li class="list-group-item">Negative (-) terminal: <%= negTerminal %></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h4>Test Output</h4>
-          <ul class="list-group text-left">
-            <li class="list-group-item">1: <%= elemOptions %> </li>
-            <li class="list-group-item">2: <%= elemOptions[0] %> </li>
-            <li class="list-group-item">3: <%= cell_X %> </li>
+            <% include ../partials/cellResults.ejs %>
           </ul>
         </div>
       </div>
