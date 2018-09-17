@@ -34,24 +34,6 @@ express()
     } 
     catch (err) {console.error(err); res.send("Error " + err);}
   })
-  .get('/test', async (req, res) => {
-    try {
-      const client = await pool.connect();
-      const elemOptions = await client.query('SELECT * FROM periodic_table');
-      res.render('pages/test', {
-        elemName_X:     '',
-        atomNum_X:      '',
-        stndElecPot_X:  '',
-        elemName_Y:     '',
-        atomNum_Y:      '',
-        stndElecPot_Y:  '',
-        elemOptions:    elemOptions.rows,
-        ecell:          ''
-      });
-      client.release();
-    } 
-    catch (err) {console.error(err); res.send("Error " + err);}
-  })
 
   .post('/', urlencodedParser, async (req, res) => {
     try {
@@ -74,18 +56,61 @@ express()
     } 
     catch (err) {console.error(err); res.send("Error " + err);}
   })
+
+  // TEST
+  .get('/test', async (req, res) => {
+    try {
+      const client = await pool.connect();
+      const elemOptions = await client.query('SELECT * FROM periodic_table');
+      res.render('pages/test', {
+        cell_X:         '',
+        cell_Y:         '',
+        elemOptions:    elemOptions.rows,
+        ecell:          '',
+        posTerminal:    '',
+        negTerminal:    ''
+      });
+      client.release();
+    } 
+    catch (err) {console.error(err); res.send("Error " + err);}
+  })
+
+  // TEST
   .post('/test', urlencodedParser, async (req, res) => {
     try {
       const client = await pool.connect();
-      const cell_X = await client.query(`SELECT * FROM periodic_table WHERE elementname='${req.body.input_x}'`);
-      const cell_Y = await client.query(`SELECT * FROM periodic_table WHERE elementname='${req.body.input_y}'`);
       const elemOptions = await client.query('SELECT * FROM periodic_table');
-      let ecell = Math.abs(parseFloat(cell_X.rows[0].sep) - parseFloat(cell_Y.rows[0].sep));
-      let posTerminal = parseFloat(cell_X.rows[0].sep) > parseFloat(cell_Y.rows[0].sep) ? cell_X.rows[0].elementname : cell_Y.rows[0].elementname;
-      let negTerminal = parseFloat(cell_X.rows[0].sep) < parseFloat(cell_Y.rows[0].sep) ? cell_X.rows[0].elementname : cell_Y.rows[0].elementname;
+      
+      // creating cell_X using a self-invoking function
+      // https://www.w3schools.com/js/js_function_definition.asp
+      let cell_X = (function () {
+        for (let i = 0; i < elemOptions.rows.length; i++) {
+          if (elemOptions.rows[i].elementname === req.body.input_x) {
+            console.log(elemOptions.rows[i]);
+            return elemOptions.rows[i];
+          };
+        };
+      })();
+
+      // creating cell_Y using a self-invoking function
+      let cell_Y = (function () {
+        for (let i = 0; i < elemOptions.rows.length; i++) {
+          if (elemOptions.rows[i].elementname === req.body.input_y) {
+            console.log(elemOptions.rows[i]);
+            return elemOptions.rows[i];
+          };
+        };
+      })();
+      
+      // calculations
+      let ecell = Math.abs(parseFloat(cell_X.sep) - parseFloat(cell_Y.sep));
+      let posTerminal = parseFloat(cell_X.sep) > parseFloat(cell_Y.sep) ? cell_X.elementname : cell_Y.elementname;
+      let negTerminal = parseFloat(cell_X.sep) < parseFloat(cell_Y.sep) ? cell_X.elementname : cell_Y.elementname;
+      
+      // render the reponse from the POST method
       res.render('pages/test', {
-        cell_X:         cell_X.rows,
-        cell_Y:         cell_Y.rows,
+        cell_X:         cell_X,
+        cell_Y:         cell_Y,
         elemOptions:    elemOptions.rows,
         ecell:          ecell,
         posTerminal:    posTerminal,

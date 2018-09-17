@@ -17,6 +17,14 @@ $ npm start
 
 Your app should now be running on [localhost:5000](http://localhost:5000/).
 
+To start a local server that loads global variables from the .env file, go to the root directory and type:
+
+$ heroku local
+
+... however, whenever you make changes server-side, ie. changes to index.js, you have to restart the server before they take effect. To automatically detect server-side changes you can use nodemon:
+
+$ nodemon --exec "heroku local" --signal SIGTERM
+
 ## Deploying to Heroku
 
 ```
