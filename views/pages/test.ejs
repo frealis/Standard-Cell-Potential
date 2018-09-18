@@ -16,8 +16,6 @@
             Select an element for cell X:
             <select id="selected_x" name="input_x" class="input form-control"> 
               <% include ../partials/elementOptions.ejs %>
-              <%= console.log(cell_Y.elementname) %>
-
             </select>
           </div>
           <div class="col-md-6">
@@ -27,6 +25,22 @@
             Select an element for cell Y:
             <select id="selected_y" name="input_y" class="input form-control"> 
               <% include ../partials/elementOptions.ejs %>
+
+              <%= console.log(cell_Y.elementname) %>
+
+              <script>
+                function setSelectedIndex_y(s, v) {
+                  for (var i = 0; i < s.options.length; i++) {
+                    if (s.options[i].text === v) {
+                      s.options[i].selected = true;
+                      return;
+                    };
+                  };
+                };
+                let a = 'Zinc';
+                setSelectedIndex_y(document.getElementById("selected_y"), a);
+              </script>
+
             </select>
           </div>
         </div>
