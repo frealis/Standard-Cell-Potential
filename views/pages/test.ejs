@@ -23,29 +23,42 @@
           </div>
           <div class="col-md-3 container">
             Select an element for cell Y:
-            <select id="selected_y" name="input_y" class="input form-control"> 
+            <select id="elements_y" name="input_y" class="input form-control"> 
               <% include ../partials/elementOptions.ejs %>
 
-              <%= console.log(cell_Y.elementname) %>
-
               <script>
+                var elements_y = document.getElementById("elements_y");
                 function setSelectedIndex_y(s, v) {
+                  //localStorage.setItem("elem_y", elements_y.options[elements_y.selectedIndex].text);
+                  //localStorage.setItem("elem_y", elements_y.options[2].value);
+
                   for (var i = 0; i < s.options.length; i++) {
+                    //console.log(s.options[i].text);
+                    //console.log(v);
+                    /*
                     if (s.options[i].text === v) {
                       s.options[i].selected = true;
                       return;
-                    };
-                  };
+                    }
+                    */
+                  }
+                  //setSelectedIndex_y(elements_y, localStorage.getItem("elem_y"));
                 };
-                let a = 'Zinc';
-                setSelectedIndex_y(document.getElementById("selected_y"), a);
+                // console.log('elem_y: ', localStorage.getItem("elem_y"));
+                // console.log('selected: ', elements_y.options[elements_y.selectedIndex].text);
+                // console.log('selected index: ', elements_y.options[elements_y.selectedIndex].index);
+                function test() {
+                  var x = elements_y.selectedIndex;
+                  var y = elements_y.options;
+                  alert("Index: " + y[x].index + " is " + y[x].text);
+                }
               </script>
 
             </select>
           </div>
         </div>
         <br>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <button onclick="test()" type="submit" class="btn btn-success">Submit</button>
       </form>
     </div>
 
