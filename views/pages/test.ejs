@@ -5,16 +5,16 @@
 
     <title>Battery Webpage - test.ejs</title>
   </head>
+    <% include ../partials/nav.ejs %>
 
   <body>
-    <% include ../partials/nav.ejs %>
 
     <div class="jumbotron text-center">
       <form method="POST" action="/test">
         <div class="row">
           <div class="col-md-3 container">
             Select an element for cell X:
-            <select id="selected_x" name="input_x" class="input form-control"> 
+            <select id="elements_x" name="input_x" class="input form-control"> 
               <% include ../partials/elementOptions.ejs %>
             </select>
           </div>
@@ -25,41 +25,41 @@
             Select an element for cell Y:
             <select id="elements_y" name="input_y" class="input form-control"> 
               <% include ../partials/elementOptions.ejs %>
-
-              <script>
-                var elements_y = document.getElementById("elements_y");
-                function setSelectedIndex_y(s, v) {
-                  //localStorage.setItem("elem_y", elements_y.options[elements_y.selectedIndex].text);
-                  //localStorage.setItem("elem_y", elements_y.options[2].value);
-
-                  for (var i = 0; i < s.options.length; i++) {
-                    //console.log(s.options[i].text);
-                    //console.log(v);
-                    /*
-                    if (s.options[i].text === v) {
-                      s.options[i].selected = true;
-                      return;
-                    }
-                    */
-                  }
-                  //setSelectedIndex_y(elements_y, localStorage.getItem("elem_y"));
-                };
-                // console.log('elem_y: ', localStorage.getItem("elem_y"));
-                // console.log('selected: ', elements_y.options[elements_y.selectedIndex].text);
-                // console.log('selected index: ', elements_y.options[elements_y.selectedIndex].index);
-                function test() {
-                  var x = elements_y.selectedIndex;
-                  var y = elements_y.options;
-                  alert("Index: " + y[x].index + " is " + y[x].text);
-                }
-              </script>
-
             </select>
           </div>
         </div>
         <br>
-        <button onclick="test()" type="submit" class="btn btn-success">Submit</button>
+        Value: <input type="text" name="value">
+        <br>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
       </form>
+
+      <script>
+        // let elements_y = document.getElementById("elements_y");
+
+        let form = document.querySelector("form");
+        form.addEventListener("submit", event => {
+          console.log("Saving value: ", form.elements[1].selectedIndex);
+          event.preventDefault();
+        });
+
+        // function setSelectedIndex_y(s, v) {  
+        //   for (var i = 0; i < s.options.length; i++) {
+        //     console.log(i, v);
+        //     if (s.options[i].index === v) {
+        //       s.options[i].selected = true;
+        //       console.log(s.options[i].text);
+        //       return;
+        //     };
+        //   };
+        // };
+
+        // function test() {
+        //   var x = elements_y.selectedIndex;
+        //   var y = elements_y.options;
+        // alert("Index: " + y[x].index + " is " + y[x].text + " ey: " + y[x].value);
+        // }
+      </script>
     </div>
 
     <div class="container">

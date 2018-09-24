@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <% include ../partials/header.ejs %>
+
+  <title>Battery Webpage - contact.ejs</title>
+</head>
+<body>
+  <% include ../partials/nav.ejs %>
+
+  <form action="/contact.ejs">
+    <select>
+      <option type="text" name="value">option 1</option>
+      <option type="text" name="value">option 2</option>
+      <option type="text" name="value">option 3</option>
+    </select>
+    Value: <input type="text" name="value">
+    <button type="submit">Save</button>
+  </form>
+
+  <script>
+    let form = document.querySelector("form");
+    form.addEventListener("submit", event => {
+      console.log("Saving value", form.elements[0].selectedIndex);
+      event.preventDefault();
+    });
+  </script>
+  
+</body>
+</html>

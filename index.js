@@ -80,7 +80,7 @@ express()
     try {
       const client = await pool.connect();
 
-      // this returns a bunch of arrays[], called rows[], that contain 
+      // this query returns a bunch of arrays[], called rows[], that contain 
       // objects{} with elementname, atomicnumber, and sep 
       const elemOptions = await client.query('SELECT * FROM periodic_table');
       
@@ -89,7 +89,6 @@ express()
       let cell_X = (function () {
         for (let i = 0; i < elemOptions.rows.length; i++) {
           if (elemOptions.rows[i].elementname === req.body.input_x) {
-            console.log(elemOptions.rows[i]);
             return elemOptions.rows[i];
           };
         };
@@ -99,19 +98,16 @@ express()
       let cell_Y = (function () {
         for (let i = 0; i < elemOptions.rows.length; i++) {
           if (elemOptions.rows[i].elementname === req.body.input_y) {
-            console.log(elemOptions.rows[i]);
             return elemOptions.rows[i];
           };
         };
       })();
 
-      
-      
       // calculations
       let ecell = Math.abs(parseFloat(cell_X.sep) - parseFloat(cell_Y.sep));
       let posTerminal = parseFloat(cell_X.sep) > parseFloat(cell_Y.sep) ? cell_X.elementname : cell_Y.elementname;
       let negTerminal = parseFloat(cell_X.sep) < parseFloat(cell_Y.sep) ? cell_X.elementname : cell_Y.elementname;
-      
+
       // render the reponse from the POST method
       res.render('pages/test', {
         cell_X:         cell_X,
@@ -124,6 +120,10 @@ express()
       client.release();
     }
     catch (err) {console.error(err); res.send("Error " + err);}
+  })
+
+  .get('/contact', async (req, res) => {
+    res.render('pages/contact');
   })
 
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
