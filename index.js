@@ -108,6 +108,8 @@ express()
       let posTerminal = parseFloat(cell_X.sep) > parseFloat(cell_Y.sep) ? cell_X.elementname : cell_Y.elementname;
       let negTerminal = parseFloat(cell_X.sep) < parseFloat(cell_Y.sep) ? cell_X.elementname : cell_Y.elementname;
 
+      console.log(cell_Y);
+
       // render the reponse from the POST method
       res.render('pages/test', {
         cell_X:         cell_X,

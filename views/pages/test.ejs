@@ -8,7 +8,6 @@
     <% include ../partials/nav.ejs %>
 
   <body>
-
     <div class="jumbotron text-center">
       <form method="POST" action="/test">
         <div class="row">
@@ -29,36 +28,23 @@
           </div>
         </div>
         <br>
-        Value: <input type="text" name="value">
-        <br>
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        <button onclick="keepSelection()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
       </form>
 
+      <%= cell_Y.elementname %>
+      <%  %>
+
       <script>
-        // let elements_y = document.getElementById("elements_y");
 
-        let form = document.querySelector("form");
-        form.addEventListener("submit", event => {
-          console.log("Saving value: ", form.elements[1].selectedIndex);
-          event.preventDefault();
-        });
+        let elements_y = document.getElementById('elements_y');
 
-        // function setSelectedIndex_y(s, v) {  
-        //   for (var i = 0; i < s.options.length; i++) {
-        //     console.log(i, v);
-        //     if (s.options[i].index === v) {
-        //       s.options[i].selected = true;
-        //       console.log(s.options[i].text);
-        //       return;
-        //     };
-        //   };
-        // };
+        function keepSelection() {
+          localStorage.setItem("user_selection", elements_y.selectedIndex);
+        };
 
-        // function test() {
-        //   var x = elements_y.selectedIndex;
-        //   var y = elements_y.options;
-        // alert("Index: " + y[x].index + " is " + y[x].text + " ey: " + y[x].value);
-        // }
+        elements_y.selectedIndex = localStorage.getItem('user_selection');
+        localStorage.removeItem("user_selection");
+
       </script>
     </div>
 
