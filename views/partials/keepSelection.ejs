@@ -1,0 +1,16 @@
+
+<!-- Keep drop-down selections after submission -->
+<script>
+  let elements_x = document.getElementById('elements_x');
+  let elements_y = document.getElementById('elements_y');
+
+  function keepSelection() {
+    localStorage.setItem("selection_x", elements_x.selectedIndex);
+    localStorage.setItem("selection_y", elements_y.selectedIndex);
+  };
+
+  elements_x.selectedIndex = localStorage.getItem('selection_x');
+  elements_y.selectedIndex = localStorage.getItem('selection_y');
+  localStorage.removeItem("selection_x");
+  localStorage.removeItem("selection_y");
+</script>

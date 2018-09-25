@@ -1,8 +1,6 @@
 
-<!-- iterate through elemOptions to populate the drop-down menus with names -->
-<% for(var i = 0; i < elemOptions.length; i++) { %>
+
+<!-- Iterate through elemOptions to populate drop-down menu options -->
+<% for(let i = 0; i < elemOptions.length; i++) { %>
   <option><%= elemOptions[i].elementname %></option>
 <% }; %>
-
-<!-- save the previously selected element after a POST request -->
-<!-- https://www.daftlogic.com/information-programmatically-preselect-dropdown-using-javascript.htm -->

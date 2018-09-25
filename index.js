@@ -21,14 +21,12 @@ express()
       const client = await pool.connect();
       const elemOptions = await client.query('SELECT * FROM periodic_table');
       res.render('pages/', {
-        elemName_A:     '',
-        atomNum_A:      '',
-        stndElecPot_A:  '',
-        elemName_B:     '',
-        atomNum_B:      '',
-        stndElecPot_B:  '',
+        cell_X:         '',
+        cell_Y:         '',
         elemOptions:    elemOptions.rows,
-        ecell:          ''
+        ecell:          '',
+        posTerminal:    '',
+        negTerminal:    ''
       });
       client.release();
     } 
@@ -38,22 +36,42 @@ express()
   .post('/', urlencodedParser, async (req, res) => {
     try {
       const client = await pool.connect();
-      const cell_A = await client.query(`SELECT * FROM periodic_table WHERE elementname='${req.body.input_a}'`);
-      const cell_B = await client.query(`SELECT * FROM periodic_table WHERE elementname='${req.body.input_b}'`);
       const elemOptions = await client.query('SELECT * FROM periodic_table');
-      var ecell = Math.abs(parseFloat(cell_A.rows[0].sep) - parseFloat(cell_B.rows[0].sep))
+      
+      // create cell_X using a self-invoking function
+      let cell_X = (function () {
+        for (let i = 0; i < elemOptions.rows.length; i++) {
+          if (elemOptions.rows[i].elementname === req.body.input_x) {
+            return elemOptions.rows[i];
+          };
+        };
+      })();
+
+      // create cell_Y using a self-invoking function
+      let cell_Y = (function () {
+        for (let i = 0; i < elemOptions.rows.length; i++) {
+          if (elemOptions.rows[i].elementname === req.body.input_y) {
+            return elemOptions.rows[i];
+          };
+        };
+      })();
+
+      // calculations
+      let ecell = Math.abs(parseFloat(cell_X.sep) - parseFloat(cell_Y.sep));
+      let posTerminal = parseFloat(cell_X.sep) > parseFloat(cell_Y.sep) ? cell_X.elementname : cell_Y.elementname;
+      let negTerminal = parseFloat(cell_X.sep) < parseFloat(cell_Y.sep) ? cell_X.elementname : cell_Y.elementname;
+
+      // render the reponse from the POST method
       res.render('pages/', {
-        elemName_A:     cell_A.rows[0].elementname,
-        atomNum_A:      cell_A.rows[0].atomicnumber,
-        stndElecPot_A:  cell_A.rows[0].sep,
-        elemName_B:     cell_B.rows[0].elementname,
-        atomNum_B:      cell_B.rows[0].atomicnumber,
-        stndElecPot_B:  cell_B.rows[0].sep,
+        cell_X:         cell_X,
+        cell_Y:         cell_Y,
         elemOptions:    elemOptions.rows,
-        ecell:          ecell
+        ecell:          ecell,
+        posTerminal:    posTerminal,
+        negTerminal:    negTerminal
       });
       client.release();
-    } 
+    }
     catch (err) {console.error(err); res.send("Error " + err);}
   })
 

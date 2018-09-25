@@ -31,21 +31,7 @@
         <button onclick="keepSelection()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
       </form>
 
-      <%= cell_Y.elementname %>
-      <%  %>
-
-      <script>
-
-        let elements_y = document.getElementById('elements_y');
-
-        function keepSelection() {
-          localStorage.setItem("user_selection", elements_y.selectedIndex);
-        };
-
-        elements_y.selectedIndex = localStorage.getItem('user_selection');
-        localStorage.removeItem("user_selection");
-
-      </script>
+      <% include ../partials/keepSelection.ejs %>
     </div>
 
     <div class="container">
