@@ -1,9 +1,61 @@
 
 <!-- Keep drop-down selections after submission -->
 <script>
+
+  // Periodic table variables
+  let cells = document.getElementsByTagName("td");
+  let activeBlue = 0;
+  let activePurple=0;
+
+  // Drop-down menu variables
   let elements_x = document.getElementById('elements_x');
   let elements_y = document.getElementById('elements_y');
 
+  // Periodic table
+  window.onload = function() {
+    for (let i = 0; i < cells.length; i++) {
+      cells[i].onclick = activeColor;
+    }
+  };
+
+  function activeColor() {
+    let color = window.event.target.style.color;
+    if (color === '' && activeBlue === 0 && activePurple === 0) { // first selection is blue
+      window.event.target.style.color = 'blue';
+      activeBlue++;
+      for (let k = 0; k < elements_x.options.length; k++){
+        if (window.event.target.id === elements_x.options[k].value) {
+          elements_x.options[k].selected = true;
+        }
+      }
+      // elements_x.selectedIndex = window.event.target
+    } else if (color === '' && activeBlue === 1 && activePurple === 0) {
+      window.event.target.style.color = 'purple';
+      activePurple++;
+      for (let k = 0; k < elements_y.options.length; k++){
+        if (window.event.target.id === elements_y.options[k].value) {
+          elements_y.options[k].selected = true;
+        }
+      }
+    } else if (color === '' && activeBlue === 0 && activePurple === 1) {
+      window.event.target.style.color = 'blue';
+      activeBlue++;
+    } else if (color === '' && activeBlue === 1 && activePurple === 1) { // reset
+      for (let j = 0; j < cells.length; j++) {
+        cells[j].style = '';
+      }
+      activeBlue--;
+      activePurple--;
+    } else if (color === 'blue') {
+      window.event.target.style.color = '';
+      activeBlue--;
+    } else if (color === 'purple') {
+      window.event.target.style.color = '';
+      activePurple--;
+    }
+  };
+
+  // Drop-down menu
   function keepSelection() {
     localStorage.setItem("selection_x", elements_x.selectedIndex);
     localStorage.setItem("selection_y", elements_y.selectedIndex);

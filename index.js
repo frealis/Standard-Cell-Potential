@@ -79,7 +79,7 @@ express()
   .get('/test', async (req, res) => {
     try {
       const client = await pool.connect();
-      const elemOptions = await client.query('SELECT * FROM periodic_table');
+      const elemOptions = await client.query('SELECT * FROM periodic_table ORDER BY atomicnumber');
       res.render('pages/test', {
         cell_X:         '',
         cell_Y:         '',
@@ -100,7 +100,7 @@ express()
 
       // this query returns a bunch of arrays[], called rows[], that contain 
       // objects{} with elementname, atomicnumber, and sep 
-      const elemOptions = await client.query('SELECT * FROM periodic_table');
+      const elemOptions = await client.query('SELECT * FROM periodic_table ORDER BY atomicnumber');
       
       // create cell_X using a self-invoking function
       // https://www.w3schools.com/js/js_function_definition.asp
@@ -125,8 +125,6 @@ express()
       let ecell = Math.abs(parseFloat(cell_X.sep) - parseFloat(cell_Y.sep));
       let posTerminal = parseFloat(cell_X.sep) > parseFloat(cell_Y.sep) ? cell_X.elementname : cell_Y.elementname;
       let negTerminal = parseFloat(cell_X.sep) < parseFloat(cell_Y.sep) ? cell_X.elementname : cell_Y.elementname;
-
-      console.log(cell_Y);
 
       // render the reponse from the POST method
       res.render('pages/test', {
