@@ -5,7 +5,7 @@
   // Periodic table variables
   let cells = document.getElementsByTagName("td");
   let activeBlue = 0;
-  let activePurple=0;
+  let activePurple = 0;
 
   // Drop-down menu variables
   let elements_x = document.getElementById('elements_x');
@@ -20,7 +20,7 @@
 
   function activeColor() {
     let color = window.event.target.style.color;
-    if (color === '' && activeBlue === 0 && activePurple === 0) { // first selection is blue
+    if (color === '' && activeBlue === 0 && activePurple === 0) {
       window.event.target.style.color = 'blue';
       activeBlue++;
       for (let k = 0; k < elements_x.options.length; k++){
@@ -28,7 +28,6 @@
           elements_x.options[k].selected = true;
         }
       }
-      // elements_x.selectedIndex = window.event.target
     } else if (color === '' && activeBlue === 1 && activePurple === 0) {
       window.event.target.style.color = 'purple';
       activePurple++;
@@ -40,6 +39,11 @@
     } else if (color === '' && activeBlue === 0 && activePurple === 1) {
       window.event.target.style.color = 'blue';
       activeBlue++;
+      for (let k = 0; k < elements_x.options.length; k++){
+        if (window.event.target.id === elements_x.options[k].value) {
+          elements_x.options[k].selected = true;
+        }
+      }
     } else if (color === '' && activeBlue === 1 && activePurple === 1) { // reset
       for (let j = 0; j < cells.length; j++) {
         cells[j].style = '';

@@ -11,49 +11,43 @@
     <div class="jumbotron text-center">
       <form method="POST" action="/test">
         <div class="row">
-          <div class="col-md-3 container"></div>
+          <!-- Left spacer -->
+          <div class="col-md-3"></div>
 
-          <div class="col-md-6">
-            <table class="table table-dark">
-              <tr>
-                <td>H</td>
-                <td colspan=16></td>
-                <td>He</td>
-              </tr>
-              <tr>
-                <!-- <td style="color: blue;">Li</td> -->
-                <td id="Lithium">Li</td>
-                <td>Be</td>
-                <td colspan=10></td>
-                <td>B</td>
-                <td>C</td>
-                <td>N</td>
-                <td>O</td>
-                <td>F</td>
-                <td>Ne</td>
-              </tr>
-            </table>
+          <!-- Periodic table & drop-down menus -->
+          <div class="col-md-6 table-responsive noselect">
+            <% include ../partials/periodicTable.ejs %>
 
-            Select an element for cell X:
-            <select id="elements_x" name="input_x" class="input form-control"> 
-              <% include ../partials/elementOptions.ejs %>
-            </select>
-            
-            Select an element for cell Y:
-            <select id="elements_y" name="input_y" class="input form-control"> 
-              <% include ../partials/elementOptions.ejs %>
-            </select>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-6">
+                  Select an element for cell X:
+                  <select id="elements_x" name="input_x" class="input form-control"> 
+                    <% include ../partials/elementOptions.ejs %>
+                  </select>
+                </div>  
+                <div class="col-md-6">
+                  Select an element for cell Y:
+                  <select id="elements_y" name="input_y" class="input form-control"> 
+                    <% include ../partials/elementOptions.ejs %>
+                  </select>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <div class="col-md-3 container"></div>
+          <!-- Right spacer -->
+          <div class="col-md-3"></div>
         </div>
         <br>
         <button onclick="keepSelection()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
       </form>
 
+      <!-- JavaScript -->
       <% include ../partials/keepSelection.ejs %>
     </div>
 
+    <!-- Results -->
     <div class="container">
       <div class="row">
         <div class="col-md-4">
