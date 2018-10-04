@@ -40,17 +40,21 @@
         }
       }
     } else if (color === '' && activeBlue === 1 && activePurple === 1) { // reset
-      for (let j = 0; j < cells.length; j++) {
-        cells[j].style = '';
+      for (let k = 0; k < cells.length; k++) {
+        cells[k].style = '';
       }
       activeBlue--;
       activePurple--;
+      elements_x.options[0].selected = true
+      elements_y.options[0].selected = true
     } else if (color === 'blue') {
       window.event.target.style.color = '';
       activeBlue--;
+      elements_x.options[0].selected = true
     } else if (color === 'purple') {
       window.event.target.style.color = '';
       activePurple--;
+      elements_y.options[0].selected = true
     }
   };
 
@@ -68,7 +72,7 @@
         activeBlue++;
       }
     }
-  }
+  };
 
   function updatePeriodicTable_y() {
     let elements_y = document.getElementById("elements_y");
@@ -83,19 +87,19 @@
         activePurple++;
       }
     }
-  }
-
-  // Drop-down menu
-  let elements_x = document.getElementById('elements_x');
-  let elements_y = document.getElementById('elements_y');
-
-  function keepSelection() {
-    localStorage.setItem("selection_x", elements_x.selectedIndex);
-    localStorage.setItem("selection_y", elements_y.selectedIndex);
   };
 
-  elements_x.selectedIndex = localStorage.getItem('selection_x');
-  elements_y.selectedIndex = localStorage.getItem('selection_y');
-  localStorage.removeItem("selection_x");
-  localStorage.removeItem("selection_y");
+  // Drop-down menu
+  // let elements_x = document.getElementById('elements_x');
+  // let elements_y = document.getElementById('elements_y');
+
+  // function keepSelection() {
+  //   localStorage.setItem("selection_x", elements_x.selectedIndex);
+  //   localStorage.setItem("selection_y", elements_y.selectedIndex);
+  // };
+
+  // elements_x.selectedIndex = localStorage.getItem('selection_x');
+  // elements_y.selectedIndex = localStorage.getItem('selection_y');
+  // localStorage.removeItem("selection_x");
+  // localStorage.removeItem("selection_y");
 </script>

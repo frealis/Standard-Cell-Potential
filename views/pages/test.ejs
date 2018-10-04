@@ -16,18 +16,29 @@
 
           <!-- Periodic table & drop-down menus -->
           <div class="col-md-6 table-responsive noselect">
+            <!-- <img src="battery-galvanic-02.png" class="mw-100"> -->
+
+            <div class="container">
+              <div class="row">
+                <div class="col-md py-2">
+                    <h5><span><%= cell_X.elementname %></span></h5>
+                    <h5><span><%= cell_Y.elementname %></span></h5>
+                </div>
+              </div>
+            </div>
+
             <% include ../partials/periodicTable.ejs %>
 
             <div class="container">
               <div class="row">
-                <div class="col-md-6">
-                  Select an element for cell X:
+                <div class="col-md py-2">
+                  Cell X
                   <select id="elements_x" name="input_x" class="input form-control" onchange="updatePeriodicTable_x();"> 
                     <% include ../partials/elementOptions.ejs %>
                   </select>
                 </div>  
-                <div class="col-md-6">
-                  Select an element for cell Y:
+                <div class="col-md py-2">
+                  Cell Y
                   <select id="elements_y" name="input_y" class="input form-control" onchange="updatePeriodicTable_y();"> 
                     <% include ../partials/elementOptions.ejs %>
                   </select>
@@ -48,22 +59,22 @@
     </div>
 
     <!-- Results -->
-    <div class="container">
+    <div class="container pb-4">
       <div class="row">
-        <div class="col-md-4">
-          <h4>Cell X</h4>
+        <div class="col-md-4 py-2">
+          <h6>Cell X</h6>
           <ul id="ul_x" class="list-group text-left">
            <% include ../partials/cellXData.ejs %>
           </ul>
         </div>
-        <div class="col-md-4">
-          <h4>Cell Y</h4>
+        <div class="col-md-4 py-2">
+          <h6>Cell Y</h6>
           <ul class="list-group text-left">
            <% include ../partials/cellYData.ejs %>
           </ul>
         </div>
-        <div class="col-md-4">
-          <h4>Results</h4>
+        <div class="col-md-4 py-2">
+          <h6>Results</h6>
           <ul class="list-group text-left">
             <% include ../partials/cellResults.ejs %>
           </ul>
