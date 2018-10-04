@@ -22,13 +22,13 @@
               <div class="row">
                 <div class="col-md-6">
                   Select an element for cell X:
-                  <select id="elements_x" name="input_x" class="input form-control"> 
+                  <select id="elements_x" name="input_x" class="input form-control" onchange="updatePeriodicTable_x();"> 
                     <% include ../partials/elementOptions.ejs %>
                   </select>
                 </div>  
                 <div class="col-md-6">
                   Select an element for cell Y:
-                  <select id="elements_y" name="input_y" class="input form-control"> 
+                  <select id="elements_y" name="input_y" class="input form-control" onchange="updatePeriodicTable_y();"> 
                     <% include ../partials/elementOptions.ejs %>
                   </select>
                 </div>

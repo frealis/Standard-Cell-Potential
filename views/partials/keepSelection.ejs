@@ -1,17 +1,12 @@
 
-<!-- Keep drop-down selections after submission -->
+<!-- Periodic table and drop-down menu scripts -->
 <script>
 
-  // Periodic table variables
+  // Periodic table
   let cells = document.getElementsByTagName("td");
   let activeBlue = 0;
   let activePurple = 0;
-
-  // Drop-down menu variables
-  let elements_x = document.getElementById('elements_x');
-  let elements_y = document.getElementById('elements_y');
-
-  // Periodic table
+ 
   window.onload = function() {
     for (let i = 0; i < cells.length; i++) {
       cells[i].onclick = activeColor;
@@ -59,7 +54,41 @@
     }
   };
 
+  // Update periodic table based on drop-down menu selection
+  function updatePeriodicTable_x() {
+    let elements_x = document.getElementById("elements_x");
+    let x_selectedValue = elements_x.options[elements_x.selectedIndex].value;
+    for (let l = 0; l < cells.length; l++){
+      if (cells[l].style.color === 'blue') {
+        cells[l].style.color = '';
+        activeBlue--;
+      } else if (x_selectedValue === cells[l].id) {
+        console.log('cells[l].id:', cells[l].id);
+        cells[l].style.color = 'blue';
+        activeBlue++;
+      }
+    }
+  }
+
+  function updatePeriodicTable_y() {
+    let elements_y = document.getElementById("elements_y");
+    let y_selectedValue = elements_y.options[elements_y.selectedIndex].value;
+    for (let l = 0; l < cells.length; l++){
+      if (cells[l].style.color === 'purple') {
+        cells[l].style.color = '';
+        activePurple--;
+      } else if (y_selectedValue === cells[l].id) {
+        console.log('cells[l].id:', cells[l].id);
+        cells[l].style.color = 'purple';
+        activePurple++;
+      }
+    }
+  }
+
   // Drop-down menu
+  let elements_x = document.getElementById('elements_x');
+  let elements_y = document.getElementById('elements_y');
+
   function keepSelection() {
     localStorage.setItem("selection_x", elements_x.selectedIndex);
     localStorage.setItem("selection_y", elements_y.selectedIndex);
