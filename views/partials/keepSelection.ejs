@@ -17,6 +17,7 @@
     let color = window.event.target.style.color;
     if (color === '' && activeBlue === 0 && activePurple === 0) {
       window.event.target.style.color = 'blue';
+      window.event.target.style.fontWeight = 'bold';
       activeBlue++;
       for (let k = 0; k < elements_x.options.length; k++){
         if (window.event.target.id === elements_x.options[k].value) {
@@ -25,6 +26,7 @@
       }
     } else if (color === '' && activeBlue === 1 && activePurple === 0) {
       window.event.target.style.color = 'purple';
+      window.event.target.style.fontWeight = 'bold';
       activePurple++;
       for (let k = 0; k < elements_y.options.length; k++){
         if (window.event.target.id === elements_y.options[k].value) {
@@ -33,6 +35,7 @@
       }
     } else if (color === '' && activeBlue === 0 && activePurple === 1) {
       window.event.target.style.color = 'blue';
+      window.event.target.style.fontWeight = 'bold';
       activeBlue++;
       for (let k = 0; k < elements_x.options.length; k++){
         if (window.event.target.id === elements_x.options[k].value) {
@@ -42,6 +45,7 @@
     } else if (color === '' && activeBlue === 1 && activePurple === 1) { // reset
       for (let k = 0; k < cells.length; k++) {
         cells[k].style = '';
+        cells[k].fontWeight = '';
       }
       activeBlue--;
       activePurple--;
@@ -49,10 +53,12 @@
       elements_y.options[0].selected = true
     } else if (color === 'blue') {
       window.event.target.style.color = '';
+      window.event.target.style.fontWeight = '';
       activeBlue--;
       elements_x.options[0].selected = true
     } else if (color === 'purple') {
       window.event.target.style.color = '';
+      window.event.target.style.fontWeight = '';
       activePurple--;
       elements_y.options[0].selected = true
     }
@@ -65,10 +71,12 @@
     for (let l = 0; l < cells.length; l++){
       if (cells[l].style.color === 'blue') {
         cells[l].style.color = '';
+        cells[l].style.fontWeight = '';
         activeBlue--;
       } else if (x_selectedValue === cells[l].id) {
         console.log('cells[l].id:', cells[l].id);
         cells[l].style.color = 'blue';
+        cells[l].style.fontWeight = 'bold';
         activeBlue++;
       }
     }
@@ -80,10 +88,12 @@
     for (let l = 0; l < cells.length; l++){
       if (cells[l].style.color === 'purple') {
         cells[l].style.color = '';
+        cells[l].style.fontWeight = '';
         activePurple--;
       } else if (y_selectedValue === cells[l].id) {
         console.log('cells[l].id:', cells[l].id);
         cells[l].style.color = 'purple';
+        cells[l].style.fontWeight = 'bold';
         activePurple++;
       }
     }

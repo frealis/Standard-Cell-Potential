@@ -8,37 +8,43 @@
     <% include ../partials/nav.ejs %>
 
   <body>
-    <div class="jumbotron text-center">
+    <div class="container text-center">
       <form method="POST" action="/test">
         <div class="row">
-          <!-- Left spacer -->
-          <div class="col-md-3"></div>
-
-          <!-- Periodic table & drop-down menus -->
-          <div class="col-md-6 table-responsive noselect">
-            <!-- <img src="battery-galvanic-02.png" class="mw-100"> -->
+          <!-- Image, periodic table, & drop-down menus -->
+          <div class="col-md table-responsive noselect">
+            <img src="battery-galvanic-03.png" class="mw-100 py-4">
 
             <div class="container">
               <div class="row">
                 <div class="col-md py-2">
-                    <h5><span><%= cell_X.elementname %></span></h5>
-                    <h5><span><%= cell_Y.elementname %></span></h5>
+                  <p>
+                    <h6 style="text-align: left">Instructions:</h6>
+                    <ol style="text-align: left">
+                      <li>Select an element for <span style="color: blue; font-weight: bold">Cell X</span> by clicking on a symbol in the periodic table or choosing one from the drop-down menu below -- note that only the elements highlighted in white will produce results</li>
+                      <li>Select an element for <span style="color: purple; font-weight: bold">Cell Y</span> in the same way</li>
+                      <li>Click the "Submit" button to view the results</li>
+                    </ol>
+                  </p>
+                    <!-- <%= cell_X.elementname %> <%= cell_Y.elementname %> -->
+                </div>
+            
+                <div class="col-md py-2">
+                  <% include ../partials/periodicTable.ejs %>
                 </div>
               </div>
             </div>
 
-            <% include ../partials/periodicTable.ejs %>
-
             <div class="container">
               <div class="row">
                 <div class="col-md py-2">
-                  Cell X
+                    <span style="color: blue; font-weight: bold">Cell X</span>
                   <select id="elements_x" name="input_x" class="input form-control" onchange="updatePeriodicTable_x();"> 
                     <% include ../partials/elementOptions.ejs %>
                   </select>
                 </div>  
                 <div class="col-md py-2">
-                  Cell Y
+                    <span style="color: purple; font-weight: bold">Cell Y</span>
                   <select id="elements_y" name="input_y" class="input form-control" onchange="updatePeriodicTable_y();"> 
                     <% include ../partials/elementOptions.ejs %>
                   </select>
@@ -46,9 +52,6 @@
               </div>
             </div>
           </div>
-
-          <!-- Right spacer -->
-          <div class="col-md-3"></div>
         </div>
         <br>
         <button onclick="keepSelection()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
