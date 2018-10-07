@@ -140,8 +140,12 @@ express()
     catch (err) {console.error(err); res.send("Error " + err);}
   })
 
-  .get('/contact', async (req, res) => {
-    res.render('pages/contact');
+  .get('/about', async (req, res) => {
+    res.render('pages/about');
+  })
+
+  .get('/resources', async (req, res) => {
+    res.render('pages/resources');
   })
 
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
