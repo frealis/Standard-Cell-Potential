@@ -3,13 +3,16 @@
   <head>
     <% include ../partials/header.ejs %>
 
+    <!-- JavaScript -->
+    <% include ../partials/keepSelection.ejs %>
+
     <title>Cell Potential - test.ejs</title>
   </head>
     <% include ../partials/nav.ejs %>
 
   <body>
     <div class="container text-center mt-3 mb-5">
-      <form method="POST" action="/test">
+      <form method="POST" action="/test" onsubmit="return validateForm()">
         <div class="row">
           <!-- Image, periodic table, & drop-down menus -->
           <div class="col-md table-responsive noselect">
@@ -22,14 +25,14 @@
 
                   <div class="container">
                     <div class="row">
-                      <div class="col-md-6">
+                      <div class="col-md-6 white-text-focus">
                         <span class="cell-x">Cell X</span>
                         <select id="elements_x" name="input_x" class="input form-control bg-dark selectable" onchange="updatePeriodicTable_x();"> 
                           <% include ../partials/elementOptions.ejs %>
                         </select>
                       </div>  
 
-                      <div class="col-md-6">
+                      <div class="col-md-6 white-text-focus">
                         <span class="cell-y">Cell Y</span>
                         <select id="elements_y" name="input_y" class="input form-control bg-dark selectable" onchange="updatePeriodicTable_y();"> 
                           <% include ../partials/elementOptions.ejs %>
@@ -49,7 +52,11 @@
                     </ol>
                   </p>
 
-                  <button onclick="keepSelection()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+
+                  <div id="sea" class="alert alert-warning mt-3">
+                    Please select an element for Cell X and Cell Y before submitting.
+                  </div>
                 </div>
             
               </div>
@@ -59,8 +66,6 @@
         </div>
       </form>
 
-      <!-- JavaScript -->
-      <% include ../partials/keepSelection.ejs %>
     </div>
 
     <!-- Results -->

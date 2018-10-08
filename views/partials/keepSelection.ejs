@@ -2,12 +2,14 @@
 <!-- Periodic table and drop-down menu scripts -->
 <script>
 
-  // Periodic table
+  // Highlight selected elements in the periodic table
   let cells = document.getElementsByTagName("td");
   let activeBlue = 0;
   let activePurple = 0;
  
   window.onload = function() {
+    // This next single line really belongs with the form validation script, many many lines down
+    document.getElementById("sea").style.display = "none";
     for (let i = 0; i < cells.length; i++) {
       cells[i].onclick = activeColor;
     }
@@ -64,10 +66,9 @@
     }
   };
 
-  // Update periodic table based on drop-down menu selection
+  // Update highlighted elements in the periodic table based on drop-down menu selections
   function updatePeriodicTable_x() {
-    let elements_x = document.getElementById("elements_x");
-    let x_selectedValue = elements_x.options[elements_x.selectedIndex].value;
+    let x_selectedValue = document.getElementById("elements_x").options[elements_x.selectedIndex].value;
     for (let l = 0; l < cells.length; l++){
       if (cells[l].style.color === 'blue') {
         cells[l].style.color = '';
@@ -83,8 +84,7 @@
   };
 
   function updatePeriodicTable_y() {
-    let elements_y = document.getElementById("elements_y");
-    let y_selectedValue = elements_y.options[elements_y.selectedIndex].value;
+    let y_selectedValue = document.getElementById("elements_y").options[elements_y.selectedIndex].value;
     for (let l = 0; l < cells.length; l++){
       if (cells[l].style.color === 'purple') {
         cells[l].style.color = '';
@@ -99,17 +99,27 @@
     }
   };
 
-  // Drop-down menu
-  // let elements_x = document.getElementById('elements_x');
-  // let elements_y = document.getElementById('elements_y');
+// Form validation -- two elements must be selected before hitting the submit button
+  function validateForm() {
+    let x_index = document.getElementById("elements_x").options[elements_x.selectedIndex].index;
+    let y_index = document.getElementById("elements_y").options[elements_y.selectedIndex].index;
+    if (x_index === 0 || y_index === 0) {
+      document.getElementById("sea").style.display = "block";
+      return false;
+    }
+  };
 
-  // function keepSelection() {
-  //   localStorage.setItem("selection_x", elements_x.selectedIndex);
-  //   localStorage.setItem("selection_y", elements_y.selectedIndex);
-  // };
+// Retain drop-down menu selections after hitting the submit button
+//   let elements_x = document.getElementById('elements_x');
+//   let elements_y = document.getElementById('elements_y');
 
-  // elements_x.selectedIndex = localStorage.getItem('selection_x');
-  // elements_y.selectedIndex = localStorage.getItem('selection_y');
-  // localStorage.removeItem("selection_x");
-  // localStorage.removeItem("selection_y");
+//   function keepSelection() {
+//     localStorage.setItem("selection_x", elements_x.selectedIndex);
+//     localStorage.setItem("selection_y", elements_y.selectedIndex);
+//   };
+
+//   elements_x.selectedIndex = localStorage.getItem('selection_x');
+//   elements_y.selectedIndex = localStorage.getItem('selection_y');
+//   localStorage.removeItem("selection_x");
+//   localStorage.removeItem("selection_y");
 </script>
