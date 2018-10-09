@@ -3,59 +3,93 @@
   <head>
     <% include ../partials/header.ejs %>
 
-    <title>Battery Webpage - test.ejs</title>
+    <!-- JavaScript -->
+    <% include ../partials/javascript.ejs %>
+
+    <title>Standard Cell Potential</title>
   </head>
     <% include ../partials/nav.ejs %>
 
   <body>
-    <div class="jumbotron text-center">
-      <form method="POST" action="/test">
-        <div class="row">
-          <div class="col-md-3 container">
-            Select an element for cell X:
-            <select id="elements_x" name="input_x" class="input form-control"> 
-              <% include ../partials/elementOptions.ejs %>
-            </select>
-          </div>
-          <div class="col-md-6">
-            <!-- <img class="img-fluid" src="battery1.png"> -->
-          </div>
-          <div class="col-md-3 container">
-            Select an element for cell Y:
-            <select id="elements_y" name="input_y" class="input form-control"> 
-              <% include ../partials/elementOptions.ejs %>
-            </select>
-          </div>
-        </div>
-        <br>
-        <button onclick="keepSelection()" class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
-      </form>
+    <div class="container text-center my-5 table-responsive noselect">
+      <div class="row">
+        <form method="POST" action="/" onsubmit="return validateForm()">
 
-      <% include ../partials/keepSelection.ejs %>
+          <div class="container">
+            <div class="row">
+              <!-- Periodic table & drop-down menus -->
+              <div class="col-md">
+                <% include ../partials/periodicTable.ejs %>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 white-text-focus">
+                      <span class="cell-x">Cell X</span>
+                      <select id="elements_x" name="input_x" class="input form-control bg-dark selectable" onchange="updatePeriodicTable_x();"> 
+                        <% include ../partials/elementOptions.ejs %>
+                      </select>
+                    </div>  
+                    <div class="col-md-6 white-text-focus">
+                      <span class="cell-y">Cell Y</span>
+                      <select id="elements_y" name="input_y" class="input form-control bg-dark selectable" onchange="updatePeriodicTable_y();"> 
+                        <% include ../partials/elementOptions.ejs %>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Instructions & submit button -->
+              <div class="col-md">
+                <p>
+                  <h6 style="text-align: left">Instructions:</h6>
+                  <ol style="text-align: left">
+                    <li>Select an element for <span class="cell-x">Cell X</span> by clicking on a highlighted symbol in the periodic table or by choosing one from the drop-down menu below
+                    <li>Select an element for <span class="cell-y">Cell Y</span> in the same way</li>
+                    <li>Click the <span class="submit">Submit</span> button to view the results</li>
+                  </ol>
+                </p>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+                <div id="sea" class="alert alert-warning mt-3" style="display: none">
+                  Select an element for Cell X and Cell Y before submitting. Although all of the elements on the periodic table can be selected, only the elements highlighted in white will produce results.
+                </div>
+                <div id="conundrum" class="alert alert-warning mt-3" style="display: none">
+                  Selecting the same element for Cell X and Cell Y results in zero cell potential.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </form>
+      </div>
     </div>
 
-    <div class="container">
+    <!-- Results -->
+    <div class="container pb-5">
       <div class="row">
-        <div class="col-md-4">
-          <h4>Cell X</h4>
+        <div class="col-md-4 py-2">
+          <h6 class="cell-x text-center">Cell X</h6>
           <ul id="ul_x" class="list-group text-left">
            <% include ../partials/cellXData.ejs %>
           </ul>
         </div>
-        <div class="col-md-4">
-          <h4>Cell Y</h4>
+        <div class="col-md-4 py-2">
+          <h6 class="cell-y text-center">Cell Y</h6>
           <ul class="list-group text-left">
            <% include ../partials/cellYData.ejs %>
           </ul>
         </div>
-        <div class="col-md-4">
-          <h4>Results</h4>
+        <div class="col-md-4 py-2">
+          <h6 class="submit text-center">Results</h6>
           <ul class="list-group text-left">
             <% include ../partials/cellResults.ejs %>
           </ul>
         </div>
       </div>
+    </div>
 
-      <% include ../partials/footer.ejs %>
+    <div class="col-md text-center pb-3">
+      <img src="battery-galvanic-03.png" class="mw-100 img-responsive">
+    </div>
+    
+    <% include ../partials/footer.ejs %>
   </body>
 </html>
