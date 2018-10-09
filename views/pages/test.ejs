@@ -11,7 +11,7 @@
     <% include ../partials/nav.ejs %>
 
   <body>
-    <div class="container text-center mt-3 mb-5 table-responsive noselect">
+    <div class="container text-center my-5 table-responsive noselect">
       <div class="row">
         <form method="POST" action="/test" onsubmit="return validateForm()">
 
@@ -48,10 +48,10 @@
                   </ol>
                 </p>
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
-                <div id="sea" class="alert alert-warning mt-3">
-                  Please select an element for Cell X and Cell Y before submitting. Although all of the elements on the periodic table can be selected, only the elements highlighted in white are valid until someone updates the database to include more elements (and possibly compounds at some point).
+                <div id="sea" class="alert alert-warning mt-3" style="display: none">
+                  Select an element for Cell X and Cell Y before submitting. Although all of the elements on the periodic table can be selected, only the elements highlighted in white will produce results.
                 </div>
-                <div id="conundrum" class="alert alert-warning mt-3">
+                <div id="conundrum" class="alert alert-warning mt-3" style="display: none">
                   Selecting the same element for Cell X and Cell Y results in zero cell potential.
                 </div>
               </div>
