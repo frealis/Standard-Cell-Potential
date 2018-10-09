@@ -15,43 +15,46 @@
       <div class="row">
         <form method="POST" action="/test" onsubmit="return validateForm()">
 
-          <!-- Periodic table & drop-down menus -->
-          <div class="col-md">
-            <% include ../partials/periodicTable.ejs %>
-            <div class="container">
-              <div class="row">
-                <div class="col-md-6 white-text-focus">
-                  <span class="cell-x">Cell X</span>
-                  <select id="elements_x" name="input_x" class="input form-control bg-dark selectable" onchange="updatePeriodicTable_x();"> 
-                    <% include ../partials/elementOptions.ejs %>
-                  </select>
-                </div>  
-                <div class="col-md-6 white-text-focus">
-                  <span class="cell-y">Cell Y</span>
-                  <select id="elements_y" name="input_y" class="input form-control bg-dark selectable" onchange="updatePeriodicTable_y();"> 
-                    <% include ../partials/elementOptions.ejs %>
-                  </select>
+          <div class="container">
+            <div class="row">
+              <!-- Periodic table & drop-down menus -->
+              <div class="col-md">
+                <% include ../partials/periodicTable.ejs %>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-6 white-text-focus">
+                      <span class="cell-x">Cell X</span>
+                      <select id="elements_x" name="input_x" class="input form-control bg-dark selectable" onchange="updatePeriodicTable_x();"> 
+                        <% include ../partials/elementOptions.ejs %>
+                      </select>
+                    </div>  
+                    <div class="col-md-6 white-text-focus">
+                      <span class="cell-y">Cell Y</span>
+                      <select id="elements_y" name="input_y" class="input form-control bg-dark selectable" onchange="updatePeriodicTable_y();"> 
+                        <% include ../partials/elementOptions.ejs %>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
-
-          <!-- Instructions & submit button -->
-          <div class="col-md">
-            <p>
-              <h6 style="text-align: left">Instructions:</h6>
-              <ol style="text-align: left">
-                <li>Select an element for <span class="cell-x">Cell X</span> by clicking on a highlighted symbol in the periodic table or by choosing one from the drop-down menu below
-                <li>Select an element for <span class="cell-y">Cell Y</span> in the same way</li>
-                <li>Click the <span class="submit">Submit</span> button to view the results</li>
-              </ol>
-            </p>
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
-            <div id="sea" class="alert alert-warning mt-3">
-              Please select an element for Cell X and Cell Y before submitting. Although all of the elements on the periodic table can be selected, only the elements highlighted in white are valid until someone updates the database to include more elements (and possibly compounds at some point).
-            </div>
-            <div id="conundrum" class="alert alert-warning mt-3">
-              Selecting the same element for Cell X and Cell Y results in zero cell potential.
+              <!-- Instructions & submit button -->
+              <div class="col-md">
+                <p>
+                  <h6 style="text-align: left">Instructions:</h6>
+                  <ol style="text-align: left">
+                    <li>Select an element for <span class="cell-x">Cell X</span> by clicking on a highlighted symbol in the periodic table or by choosing one from the drop-down menu below
+                    <li>Select an element for <span class="cell-y">Cell Y</span> in the same way</li>
+                    <li>Click the <span class="submit">Submit</span> button to view the results</li>
+                  </ol>
+                </p>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Submit</button>
+                <div id="sea" class="alert alert-warning mt-3">
+                  Please select an element for Cell X and Cell Y before submitting. Although all of the elements on the periodic table can be selected, only the elements highlighted in white are valid until someone updates the database to include more elements (and possibly compounds at some point).
+                </div>
+                <div id="conundrum" class="alert alert-warning mt-3">
+                  Selecting the same element for Cell X and Cell Y results in zero cell potential.
+                </div>
+              </div>
             </div>
           </div>
 
@@ -83,7 +86,10 @@
       </div>
     </div>
 
-    <img src="battery-galvanic-03.png" class="mw-100">
+    <div class="col-md text-center pb-3">
+      <img src="battery-galvanic-03.png" class="mw-100 img-responsive">
+    </div>
+    
     <% include ../partials/footer.ejs %>
   </body>
 </html>
